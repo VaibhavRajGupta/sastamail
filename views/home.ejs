@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Sign In and Sign Up Page - Bootdey.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container pb-5 mb-sm-4">
+    <div class="row pt-5">
+        <div class="col-md-6 pt-sm-3">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="h4 mb-1">Sign in</h2>
+                    <div class="d-sm-flex align-items-center py-3">
+                        <h3 class="h6 font-weight-semibold opacity-70 mb-3 mb-sm-2 mr-sm-3">With social account:</h3>
+                        <div>
+                            <a class="social-btn sb-facebook mr-2 mb-2" href="#" data-toggle="tooltip" title="" data-original-title="Sign in with Facebook">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                            <a class="social-btn sb-twitter mr-2 mb-2" href="#" data-toggle="tooltip" title="" data-original-title="Sign in with Twitter">
+                                <i class="fa fa-twitter"></i> 
+                            </a>
+                            <a class="social-btn sb-google mr-2 mb-2" href="#" data-toggle="tooltip" title="" data-original-title="Sign in with LinkedIn">
+                                <i class="fa fa-google"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <hr>
+                    <h3 class="h6 font-weight-semibold opacity-70 pt-4 pb-2">Or using form below</h3>
+                    <form method="post"  class="needs-validation" action="/signin">
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></span></div>
+                            <input class="form-control" name="username" type="text" placeholder="username" required>
+                            <div class="invalid-feedback">Please enter valid email address!</div>
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></span></div>
+                            <input class="form-control" type="password" name="password" placeholder="Password" required>
+                            <div class="invalid-feedback">Please enter valid password!</div>
+                        </div>
+                        <div class="d-flex flex-wrap justify-content-between">
+                            <div class="custom-control custom-checkbox">
+                                <input class="custom-control-input" type="checkbox" checked="" id="remember_me">
+                                <label class="custom-control-label" for="remember_me">Remember me</label>
+                            </div><a class="nav-link-inline font-size-sm" href="account-password-recovery.html">Forgot password?</a>
+                        </div>
+                        <hr class="mt-4">
+                        <div class="text-right pt-4">
+                            <button class="btn btn-primary" type="submit">Sign In</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 pt-5 pt-sm-3">
+            <h2 class="h4 mb-3">No account? Sign up</h2>
+            <p class="text-muted mb-4">Registration takes less than a minute but gives you full control over your orders.</p>
+            <form id="userCreater" method="post" class="needs-validation" action="/signup">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="reg-fn">First Name</label>
+                            <input class="form-control" type="text" name="firstN" id="reg-fn" required>
+                            <div class="invalid-feedback">Please enter your first name!</div>
+                        </div>
+                    </div> 
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="reg-ln">Last Name</label>
+                            <input class="form-control" type="text" name="lastN" id="reg-fn" required>
+                            <div class="invalid-feedback">Please enter your last name!</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="reg-ln">Username</label>
+                            <input class="form-control" type="text" id="username" name="username" required>
+                            <h6 id="alert">Username already exists ......</h6>
+                            <div class="invalid-feedback">Please enter your last name!</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="reg-ln">Gender</label>
+                            <select name="gender" id="gender" class="form-control" required>
+                                <option value="select">Select Gender</option>
+                                <option name = "gender" value="female">Female</option>
+                                <option name = "gender" value="male">Male</option>
+                                <option name = "gender" value="others">Others</option>
+                            </select>
+                            <div class="invalid-feedback">Please enter your last name!</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="reg-email">E-mail Address</label>
+                            <input class="form-control" type="email" name="email" id="email" required>
+                            <h6 id="alt">Email already registered......</h6>
+                            <div class="invalid-feedback">Please enter valid email address!</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="reg-phone">Phone Number</label>
+                            <input class="form-control" type="text" name="pNumber" id="reg-fn" required>
+                            <div class="invalid-feedback">Please enter your phone number!</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="reg-password">Password</label>
+                            <input class="form-control" name="password" type="password" required="" id="reg-password">
+                            <div class="invalid-feedback">Please enter password!</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="reg-password-confirm">Confirm Password</label>
+                            <input class="form-control" type="password" required="" id="reg-password-confirm">
+                            <div class="invalid-feedback">Passwords do not match!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <button class="btn btn-primary" type="submit">Sign Up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style type="text/css">
+body{
+    margin-top:20px;
+    background-color:#eee;
+}
+.social-btn {
+    display: inline-block;
+    width: 2.25rem;
+    height: 2.25rem;
+    -webkit-transition: border-color 0.25s ease-in-out,background-color 0.25s ease-in-out,color 0.25s ease-in-out;
+    transition: border-color 0.25s ease-in-out,background-color 0.25s ease-in-out,color 0.25s ease-in-out;
+    border: 1px solid #e7e7e7;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #545454;
+    text-align: center;
+    text-decoration: none;
+    line-height: 2.125rem;
+    vertical-align: middle;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 1rem + 2px);
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #404040;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #e1e1e1;
+    border-radius: 0;
+    -webkit-transition: border-color 0.2s ease-in-out,-webkit-box-shadow 0.2s ease-in-out;
+    transition: border-color 0.2s ease-in-out,-webkit-box-shadow 0.2s ease-in-out;
+    transition: border-color 0.2s ease-in-out,box-shadow 0.2s ease-in-out;
+    transition: border-color 0.2s ease-in-out,box-shadow 0.2s ease-in-out,-webkit-box-shadow 0.2s ease-in-out;
+}
+.input-group>.form-control, .input-group>.form-control-plaintext, .input-group>.custom-select, .input-group>.custom-file {
+    position: relative;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    width: 1%;
+    margin-bottom: 0;
+}
+.input-group-text {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: .5rem 1rem;
+    margin-bottom: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #404040;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #fff;
+    border: 1px solid #e1e1e1;
+}
+
+#alert{
+    display: none;
+}
+#alt{
+    display: none;
+}
+
+</style>
+
+<script type="text/javascript">
+    document.querySelector('#userCreater').addEventListener('submit', (dets)=>{
+        dets.preventDefault();
+        if (document.querySelector('#reg-password').value === document.querySelector('#reg-password-confirm').value) {
+            document.querySelector('#userCreater').submit();
+        }else{
+            document.querySelector('#reg-password').style.border = '1px solid red';
+            document.querySelector('#reg-password-confirm').style.border = '1px solid red';
+        }
+    })
+
+    document.querySelector('#username').addEventListener('input', function(){
+        if(this.value.trim().length > 0){
+            axios.get(`/check/${this.value.trim()}`).then(function(user){
+                if(user.data !== null){
+                    document.querySelector('#username').style.border = '2px solid red';
+                    document.querySelector('#alert').style.display = 'initial';
+                }else{
+                    document.querySelector('#username').style.border = '2px solid rgb(237, 25, 198)';
+                    document.querySelector('#alert').style.display = 'none';
+                }
+            })
+        }
+    })
+    document.querySelector('#email').addEventListener('input', function(){
+        if(this.value.trim().length > 0){
+            axios.get(`/checkemail/${this.value.trim()}`).then(function(user){
+                if(user.data !== null){
+                    document.querySelector('#email').style.borderBottom = '2px solid red';
+                    document.querySelector('#alt').style.display = 'initial';
+                }else{
+                    document.querySelector('#email').style.borderBottom = '2px solid rgb(237, 25, 198)';
+                    document.querySelector('#alt').style.display = 'none';
+                }
+            })
+        }
+    })
+    
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js" integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>
+
+
+
+

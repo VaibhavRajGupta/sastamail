@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>inbox</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container bootdey">
+<div class="email-app mt-4">
+    <nav>
+        <div id="photo">
+            <div id="phutu">
+                <img src="../images/uploads/<%=user.profilePic%>" alt="">
+            </div>
+            <!-- <form id="prof" action="/setProfilePic" method="post" enctype= "multipart/form-data">
+                <input type="file" name="profilepic" id="pp">
+            </form> -->
+            <form  action="/setProfilePic" method="post" enctype="multipart/form-data">
+                <!-- <input type="file" name="profilepic" id="pp"> -->
+                <input type="file" name="profile" id="pfp">
+            </form>
+            <input type="file" name="" id="">
+        </div>
+        <div id="naam">
+            <h3><span class="lead" style="font-size: 2.5vw;"><%=user.username[0].toUpperCase()+ user.username.slice(1,user.username.length)%></span></h3>
+        </div>
+        <div id="abcde">
+            <a href="/profile" class="btn btn-info btn-sm ">Profile</a>
+        </div>
+        <div class="btn btn-primary btn-block compose">Compose</div>
+        <!-- <a href="/compose" class="btn btn-danger btn-block compose">Compose</a> -->
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fa fa-inbox"></i> Inbox <span class="badge badge-danger">4</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fa fa-star"></i> Stared</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fa fa-rocket"></i> Sent</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fa fa-trash-o"></i> Trash</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fa fa-bookmark"></i> Important</a>
+            </li>
+        </ul>
+    </nav>
+    <main class="inbox">
+        <div class="toolbar">
+            <div class="btn-group">
+                <button type="button" class="btn btn-light">
+                    <span class="fa fa-envelope"></span>
+                </button>
+                <button type="button" class="btn btn-light">
+                    <span class="fa fa-star"></span>
+                </button>
+                <button type="button" class="btn btn-light">
+                    <span class="fa fa-star-o"></span>
+                </button>
+                <button type="button" class="btn btn-light">
+                    <span class="fa fa-bookmark-o"></span>
+                </button>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-light">
+                    <span class="fa fa-mail-reply"></span>
+                </button>
+                <button type="button" class="btn btn-light">
+                    <span class="fa fa-mail-reply-all"></span>
+                </button>
+                <button type="button" class="btn btn-light">
+                    <span class="fa fa-mail-forward"></span>
+                </button>
+            </div>
+            <button type="button" class="btn btn-light">
+                <span class="fa fa-trash-o"></span>
+            </button>
+            <div class="btn-group">
+                <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                    <span class="fa fa-tags"></span>
+                    <span class="caret"></span>
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">add label <span class="badge badge-danger"> Home</span></a>
+                    <a class="dropdown-item" href="#">add label <span class="badge badge-info"> Job</span></a>
+                    <a class="dropdown-item" href="#">add label <span class="badge badge-success"> Clients</span></a>
+                    <a class="dropdown-item" href="#">add label <span class="badge badge-warning"> News</span></a>
+                </div>
+            </div>
+            <div class="btn-group float-right">
+                <button type="button" class="btn btn-light">
+                    <span class="fa fa-chevron-left"></span>
+                </button>
+                <button type="button" class="btn btn-light">
+                    <span class="fa fa-chevron-right"></span>
+                </button>
+            </div>
+        </div>
+
+        <ul class="messages">
+            <% user.recievedMails.reverse().forEach((recievedData)=>{ %>
+            <li class="message unread">
+                <a href="#">
+                    <div class="actions">
+                        <span class="action"><i class="fa fa-square-o"></i></span>
+                        <span class="action"><i class="fa fa-star-o"></i></span>
+                    </div>
+                    <div class="header">
+                        <span class="from"><%= recievedData.userid.username %></span>
+                        <span class="date">
+                        <span class="fa fa-paper-clip"></span> Today, 3:47 PM</span>
+                    </div>
+                    <div class="title">
+                        <%= recievedData.subject %> 
+                    </div>
+                    <div class="description">
+                        <%= recievedData.mailText.length < 45 ? recievedData.mailText :  recievedData.mailText.slice(0,45)+"..." %>
+                    </div>
+                </a>
+            </li>
+            <% }) %>
+            <div class="compose-mail p-3">
+                <div class="compose-mail-navigationbar">
+                  <i id="close" class="ri-close-line"></i>
+                </div>
+                <form action="/composeMail" method="post">
+                  <div class="mb-3 mt-2">
+                    <input name="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" aria-describedby="emailHelp" required>
+                  </div>
+                  <div class="mb-3 mt-2">
+                    <input name="subject" type="text" class="form-control" id="exampleInputEmail1" placeholder="Subject" aria-describedby="emailHelp" required>
+                  </div>
+                  <div class="mb-3">
+                    <textarea name="mailText" class="mail-text" placeholder="Start writing from here..." id="" cols="30" rows="10" required></textarea>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-between">
+                    <button type="submit" class="btn btn-primary d-flex align-items-center" style="gap: 5px;">Send<i class="ri-send-plane-2-line"></i></button>
+                    <button id="reset" type="reset" class="btn btn-danger">Reset</button>
+                  </div>
+              </form>
+              </div>
+            </ul>
+            
+    </main>
+</div>
+</div>
+
+<style type="text/css">
+body{
+background:#eee   
+}
+.email-app {
+    display: flex;
+    flex-direction: row;
+    background: #fff;
+    border: 1px solid #e1e6ef;
+}
+#photo{
+  height: 10vw;
+  width: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+#phutu{
+    height: 7.5vw;
+    width: 7.5vw;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+#phutu img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+#prof{
+    /* display: none; */
+}
+
+#naam{
+    width: inherit;
+    display: flex;
+    justify-content: center;
+}
+
+#abcde{
+    width: inherit;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.3vh;
+}
+
+.email-app nav {
+    flex: 0 0 200px;
+    padding: 1rem;
+    border-right: 1px solid #e1e6ef;
+}
+
+.email-app nav .btn-block {
+    margin-bottom: 15px;
+}
+
+.email-app nav .nav {
+    flex-direction: column;
+}
+
+.email-app nav .nav .nav-item {
+    position: relative;
+}
+
+.email-app nav .nav .nav-item .nav-link,
+.email-app nav .nav .nav-item .navbar .dropdown-toggle,
+.navbar .email-app nav .nav .nav-item .dropdown-toggle {
+    color: #151b1e;
+    border-bottom: 1px solid #e1e6ef;
+}
+
+.email-app nav .nav .nav-item .nav-link i,
+.email-app nav .nav .nav-item .navbar .dropdown-toggle i,
+.navbar .email-app nav .nav .nav-item .dropdown-toggle i {
+    width: 20px;
+    margin: 0 10px 0 0;
+    font-size: 14px;
+    text-align: center;
+}
+
+.email-app nav .nav .nav-item .nav-link .badge,
+.email-app nav .nav .nav-item .navbar .dropdown-toggle .badge,
+.navbar .email-app nav .nav .nav-item .dropdown-toggle .badge {
+    float: right;
+    margin-top: 4px;
+    margin-left: 10px;
+}
+
+.email-app main {
+    min-width: 0;
+    height: 94vh;
+    flex: 1;
+    padding: 1rem;
+}
+
+.inbox{
+    position: relative;
+    overflow: hidden;
+}
+
+.email-app .inbox .toolbar {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e1e6ef;
+}
+
+.messages{
+    overflow-y: scroll;
+    height: 80vh;
+}
+.messages::-webkit-scrollbar{
+    width: 8px;
+}
+.messages::-webkit-scrollbar-thumb{
+    background: #aaa;
+    border-radius: 50px;
+}
+
+.email-app .inbox .messages {
+    padding: 0;
+    list-style: none;
+}
+
+.email-app .inbox .message {
+    position: relative;
+    padding: 1rem 1rem 1rem 2rem;
+    cursor: pointer;
+    border-bottom: 1px solid #e1e6ef;
+}
+
+.email-app .inbox .message:hover {
+    background: #f9f9fa;
+}
+
+.email-app .inbox .message .actions {
+    position: absolute;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.email-app .inbox .message .actions .action {
+    width: 2rem;
+    margin-bottom: 0.5rem;
+    color: #c0cadd;
+    text-align: center;
+}
+
+.email-app .inbox .message a {
+    color: #000;
+}
+
+.email-app .inbox .message a:hover {
+    text-decoration: none;
+}
+
+.email-app .inbox .message.unread .header,
+.email-app .inbox .message.unread .title {
+    font-weight: bold;
+}
+
+.email-app .inbox .message .header {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0.5rem;
+}
+
+.email-app .inbox .message .header .date {
+    margin-left: auto;
+}
+
+.email-app .inbox .message .title {
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.email-app .inbox .message .description {
+    font-size: 12px;
+}
+
+.email-app .message .toolbar {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e1e6ef;
+}
+
+.email-app .message .details .title {
+    padding: 1rem 0;
+    font-weight: bold;
+}
+
+.email-app .message .details .header {
+    display: flex;
+    padding: 1rem 0;
+    margin: 1rem 0;
+    border-top: 1px solid #e1e6ef;
+    border-bottom: 1px solid #e1e6ef;
+}
+
+.email-app .message .details .header .avatar {
+    width: 40px;
+    height: 40px;
+    margin-right: 1rem;
+}
+
+.email-app .message .details .header .from {
+    font-size: 12px;
+    color: #9faecb;
+    align-self: center;
+}
+
+.email-app .message .details .header .from span {
+    display: block;
+    font-weight: bold;
+}
+
+.email-app .message .details .header .date {
+    margin-left: auto;
+}
+
+.email-app .message .details .attachments {
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+    border-top: 3px solid #f9f9fa;
+    border-bottom: 3px solid #f9f9fa;
+}
+
+.email-app .message .details .attachments .attachment {
+    display: flex;
+    margin: 0.5rem 0;
+    font-size: 12px;
+    align-self: center;
+}
+
+.email-app .message .details .attachments .attachment .badge {
+    margin: 0 0.5rem;
+    line-height: inherit;
+}
+
+.email-app .message .details .attachments .attachment .menu {
+    margin-left: auto;
+}
+
+.email-app .message .details .attachments .attachment .menu a {
+    padding: 0 0.5rem;
+    font-size: 14px;
+    color: #e1e6ef;
+}
+
+@media (max-width: 767px) {
+    .email-app {
+        flex-direction: column;
+    }
+    .email-app nav {
+        flex: 0 0 100%;
+    }
+}
+
+@media (max-width: 575px) {
+    .email-app .message .header {
+        flex-flow: row wrap;
+    }
+    .email-app .message .header .date {
+        flex: 0 0 100%;
+    }
+}
+.compose-mail{
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 30vw;
+      height: 64vh;
+      background: rgb(240, 240, 240);
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      transform: translateY(100%);
+      transition: all cubic-bezier(0.19, 1, 0.22, 1) 1s;
+    }
+    .mail-text{
+      resize: none;
+      width: 100%;
+      height: 250px;
+      border: none;
+      padding: 5px;
+      outline: none;
+    }
+    .compose-mail-navigationbar{
+      width: 100%;
+      display: flex;
+      justify-content: end;
+      font-size: 20px;
+    }
+    .compose-mail-navigationbar:hover{
+      cursor: pointer;
+    }
+    .btn{
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    document.querySelector(".compose")
+    .addEventListener("click",function(elem){
+        document.querySelector(".compose-mail").style.transform = "translateY(0)";
+    });
+
+    document.querySelector("#close")
+    .addEventListener("click",function(elem){
+        document.querySelector(".compose-mail").style.transform = "translateY(100%)";
+    });
+    document.querySelector("#reset").addEventListener("click",function(elem){
+        console.log(elem);
+    })
+    
+    // document.querySelector('#phutu img').addEventListener('click', ()=>{
+    //     // console.log('hello')
+    //     document.querySelector('#pp').click();
+    // })
+
+    // document.querySelector('#pp').addEventListener('change', ()=>{
+    //     document.querySelector('#prof').submit();
+    //     console.log('hogya')
+    // })
+
+
+</script>
+</body>
+</html>
